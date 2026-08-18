@@ -75,10 +75,22 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   from_port   = 22
   to_port     = 22
   ip_protocol = "tcp"
-  cidr_ipv4   = "178.212.106.204/32" 
+  cidr_ipv4   = "178.212.106.204/32"
 
   tags = {
     Name = "allow-ssh"
+  }
+}
+resource "aws_vpc_security_group_ingress_rule" "allow_grafana" {
+  security_group_id = aws_security_group.security_group.id
+
+  from_port   = 3000
+  to_port     = 3000
+  ip_protocol = "tcp"
+  cidr_ipv4   = "0.0.0.0/0"
+
+  tags = {
+    Name = "allow-grafana"
   }
 }
 
